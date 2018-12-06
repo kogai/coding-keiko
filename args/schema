@@ -1,0 +1,17 @@
+# Supose to small subset of options of webpack.
+
+Usage: webpack-cli [options]
+       webpack-cli [options] --entry <entry> --output <output>
+
+Config options:
+  --config               Path to the config file
+                         [string] [default: webpack.config.js or webpackfile.js]
+  --mode                 Enable production optimizations or development hints.
+                                  [choices: "development", "production", "none"]
+Resolving options:
+  --resolve-alias         Redirect module requests                      [string]
+  --resolve-extensions    Redirect module requests                       [array]
+
+Options:
+  --help, -h     Show help                                             [boolean]
+  --version, -v  Show version number                                   [boolean]
