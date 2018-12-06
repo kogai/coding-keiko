@@ -1,0 +1,23 @@
+{
+  "name": "coding-keiko",
+  "version": "1.0.0",
+  "description": "A place where to practice Kata.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kogai/coding-keiko.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kogai/coding-keiko/issues"
+  },
+  "homepage": "https://github.com/kogai/coding-keiko#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
+}
