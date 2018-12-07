@@ -1,0 +1,52 @@
+{
+  "schema": [
+    {
+      "name": "options",
+      "type": "array",
+      "items": [
+        {
+          "name": "config",
+          "shorthand": "c",
+          "type": "string",
+          "default": "webpack.config.js"
+        },
+        {
+          "name": "mode",
+          "type": "string",
+          "enum": ["development", "production", "none"]
+        },
+        {
+          "name": "resolve-alias",
+          "type": "string"
+        },
+        {
+          "name": "resolve-extensions",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "help",
+          "shorthand": "h",
+          "type": "boolean"
+        },
+        {
+          "name": "version",
+          "shorthand": "v",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "entry",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "output",
+      "type": "string",
+      "required": true
+    }
+  ]
+}
