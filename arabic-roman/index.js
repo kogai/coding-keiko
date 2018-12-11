@@ -18,36 +18,50 @@ const romanToArabic = {
 };
 
 const convert = ([...romans]) => {
-  try {
-    const result = romans
-      .map((r, i) => {
-        const next = romanToArabic[romans[i + 1]] || 0;
-        const current = romanToArabic[r];
-        if (next > current) {
-          if (current === 1 && ![5, 10].includes(next)) {
-            throw new Error("Invalid");
-          }
-          if (current === 10 && ![50, 100].includes(next)) {
-            throw new Error("Invalid");
-          }
-          if (current === 100 && ![500, 1000].includes(next)) {
-            throw new Error("Invalid");
-          }
+    try {
+      const result = romans
+        .map((r, i) => {
+          const next = romanToArabic[romans[i + 1]] || 0;
+          const current = romanToArabic[r];
           return current;
-        } else if (next === current && [5, 50, 500].includes(current)) {
-          throw new Error("Invalid");
+        })
+        .reduce((acc, x) => {
+          const lastIndex = acc.length - 1;
+          const lastChunk = acc[lastIndex];
+          if (!!lastChunk && x === lastChunk[0]) {
+            lastChunk.push(x);
+            acc[lastIndex] = lastChunk;
+            return acc;
+          }
+          acc.push([x]);
+          return acc;
+        }, [])
+        .map((x, i, xs) => {
+          const next = xs[i + 1] || 0;
+          const current = x;
+          if (next > current) {
+            if (current === 1 && ![5, 10].includes(next)) {
+              throw new Error("Invalid");
+            }
+            if (current === 10 && ![50, 100].includes(next)) {
+              throw new Error("Invalid");
+            }
+            if (current === 100 && ![500, 1000].includes(next)) {
+              throw new Error("Invalid");
+            }
+            return current;
+          } else if (next === current && [5, 50, 500].includes(current)) {
+            throw new Error("Invalid");
+          }
+        })
+        .reduce((acc, x) => acc + x, 0);
+          return result;
         }
-        return current;
-      })
-      .reduce((acc, x, i, xs) => {
-        console.log(xs);
-        return x;
-      }, [])
-      .reduce((acc, x) => acc + x, 0);
-    return result;
-  } catch (e) {
-    return e.message;
-  }
-};
+      catch (e) {
+        return e.message;
+      }
+    };
 
-module.exports = { convert };
+    module.exports = {
+      convert
+    };
