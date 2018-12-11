@@ -11,6 +11,9 @@ describe("roman-arabic", () => {
     expect(convert("VV")).toBe("Invalid");
     expect(convert("IL")).toBe("Invalid");
     expect(convert("IIV")).toBe("Invalid");
+    // Cases not considered yet
     // expect(convert("IIII")).toBe("Invalid");
+    // expect(convert("IVX")).toBe("Invalid");
+    // expect(convert("foo")).toBe("Invalid");
   });
 });
