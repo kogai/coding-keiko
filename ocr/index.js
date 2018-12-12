@@ -8,7 +8,25 @@ const ocr = str => {
   //  _  _  _  _  _  _  _  _  _
   // | || || || || || || || || |
   // |_||_||_||_||_||_||_||_||_|
-
+  const char = [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ];
+  lines.forEach(([...line], i, a) => {
+    for (let i = 0; i < 9; i += 1) {
+      const el = line.splice(0, 3);
+      console.log(el);
+      char[i].push(el);
+    }
+    console.log(char);
+  });
   const result = lines.reduce((acc, [...line], i) => {
     for (let i = 0; i < 9; i++) {
       // const element = array[index];
