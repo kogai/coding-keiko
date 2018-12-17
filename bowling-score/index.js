@@ -5,10 +5,18 @@ const scores = {
 };
 
 const normalize = ([...params]) =>
-  params.reduce((acc, x) => {
+  params.reduce((acc, x, i) => {
+    if (x === 'X') {
+      acc.index = acc.index + 1;
+      if (acc.index === 9) {
+        acc.frames.push([10,10,10]);
+      } else {
+        acc.frames.push([10, 0]);
+      }
+    }
     console.log(scores[x]);
-    return acc;
-  }, []);
+    return acc
+  }, { index: 0, frames: [] }).frames;
 
 const calculate = ([...params]) => {
   return params.map(p => {
