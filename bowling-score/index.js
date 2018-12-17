@@ -21,7 +21,7 @@ const bonus = (charCurrent, charNext, charAfterNext, isFinal) => {
     case charSpare:
       return score(charNext, charCurrent);
     case charStrike:
-      return score(charNext, charCurrent) + score(charAfterNext);
+      return score(charNext, charCurrent) + score(charAfterNext, charNext);
     default:
       return 0;
   }
