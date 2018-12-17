@@ -2,7 +2,7 @@ const { normalize, calculate } = require("./index");
 
 describe("bowling-score", () => {
   describe.only("normalize", () => {
-    it("normal", () => {
+    it.only("normal", () => {
       expect(normalize("12345123451234512345")).toEqual([
         [1, 2],
         [3, 4],
@@ -16,7 +16,7 @@ describe("bowling-score", () => {
         [4, 5]
       ]);
     });
-    it.only("perfect", () => {
+    it("perfect", () => {
       expect(normalize("XXXXXXXXXXXX")).toEqual([
         [10, 0],
         [10, 0],

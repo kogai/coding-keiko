@@ -1,22 +1,39 @@
-const scores = {
-  X: 10,
-  "/": n => 10 - n,
-  "-": 0
+const scores = n => {
+  switch (n) {
+    case "X":
+      return 10;
+    case "-":
+      return 0;
+    // case "/":
+    //   return 10 - Number(m);
+    default:
+      return Number(n);
+  }
 };
 
 const normalize = ([...params]) =>
-  params.reduce((acc, x, i) => {
-    if (x === 'X') {
-      acc.index = acc.index + 1;
-      if (acc.index === 9) {
-        acc.frames.push([10,10,10]);
+  params.reduce(
+    (acc, x, i) => {
+      if (x === "X") {
+        acc.index = acc.index + 1;
+        if (acc.index === 10) {
+          acc.frames.push([10, scores(params[i + 1]), scores(params[i + 2])]);
+        } else if (acc.index > 10) {
+        } else {
+          acc.frames.push([10, 0]);
+        }
       } else {
-        acc.frames.push([10, 0]);
+        // if (acc.frames[acc.index].length < 2) {
+        acc.index = acc.index + 1;
+        acc.frames.push([scores(x), scores(params[i + 1])]);
+        // } else {
+        // }
       }
-    }
-    console.log(scores[x]);
-    return acc
-  }, { index: 0, frames: [] }).frames;
+      // console.log(scores[x]);
+      return acc;
+    },
+    { index: 0, frames: [] }
+  ).frames;
 
 const calculate = ([...params]) => {
   return params.map(p => {
