@@ -13,4 +13,11 @@ describe("bowling-score", () => {
   it("spare", () => {
     expect(calculate("5/5/5/5/5/5/5/5/5/5/5")).toEqual(150);
   });
+  it("zero", () => {
+    expect(calculate("--------------------")).toEqual(0);
+  });
+  it("nan", () => {
+    expect(calculate("/-------------------")).toEqual(NaN);
+    expect(calculate("1234asdf")).toEqual(NaN);
+  });
 });
