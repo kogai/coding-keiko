@@ -1,44 +1,35 @@
-Array.prototype.flatten = function() {
-  return Array.prototype.concat.apply([], this);
+const charSpare = '/';
+const charStrike = 'X';
+const charGutter = '-';
+
+const score = (charCurrent, charPrev) => {
+  switch (charCurrent) {
+    case charSpare:
+      return 10 - Number(charPrev);
+    case charStrike:
+      return 10;
+    case charGutter:
+      return 0;
+    default:
+      return Number(charCurrent);
+  }
 };
 
-const calculate = ([...xs]) => {
-  return xs.map(x => {
-    if (x === 'X') {
-      return ['10', '0'];
-    }
-    return [x];
-  }).flatten().reduce(({ a, b }, x, i, xs) => {
-    b.push(x);
-    if (b.length >= 2) {
-      a.push([...b]);
-      b = [];
-    } else if (i === xs.length - 1) {
-      a.push([x, 0]);
-    }
-    return { a, b };
-  }, { a: [], b: [] }).a.map(([x, y]) => {
-    const xn = Number(x);
-    if (y === '/') {
-      return [xn, 10 - xn] 
-    } else if (y === '-') {
-      return [xn, 0];
-    }
-    return [xn, Number(y)];
-  })
-  .reduce((acc, line, i, lines) => {
-    acc += line[0] + line[1];
-    if (i >= 9) return acc;
-    if (line[0] >= 10 && lines[i + 1] && lines[i + 2] && lines[i + 1][0] >= 10) {
-      acc += lines[i + 1][0] + lines[i + 2][0];
-    } else if (line[0] >= 10 && lines[i + 1]) {
-      acc += lines[i + 1][0] + lines[i + 1][1];
-    } else if (line[0] + line[1] >= 10 && lines[i + 1]) {
-      acc += lines[i + 1][0];
-    }
-    return acc;
-  }, 0);
+const bonus = (charCurrent, charNext, charAfterNext, isFinal) => {
+  if (isFinal) return 0;
+  switch (charCurrent) {
+    case charSpare:
+      return score(charNext, charCurrent);
+    case charStrike:
+      return score(charNext, charCurrent) + score(charAfterNext);
+    default:
+      return 0;
+  }
 };
+
+const calculate = ([...chars]) => chars.reduce((acc, x, i, xs) => (
+  acc + score(x, xs[i - 1]) + bonus(x, xs[i + 1], xs[i + 2], !xs[i + 3])
+), 0);
 
 module.exports = {
   calculate,
