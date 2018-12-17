@@ -1,0 +1,17 @@
+const json = require("./schema.json");
+const { calculate } = require("./index");
+
+describe("bowling-score", () => {
+  it("normal", () => {
+    expect(calculate("12345123451234512345")).toEqual(60);
+  });
+  it("perfect", () => {
+    expect(calculate("XXXXXXXXXXXX")).toEqual(300);
+  });
+  it("heartbreak", () => {
+    expect(calculate("9-9-9-9-9-9-9-9-9-9-")).toEqual(90);
+  });
+  it("spare", () => {
+    expect(calculate("5/5/5/5/5/5/5/5/5/5/5")).toEqual(150);
+  });
+});
