@@ -4,7 +4,7 @@ describe("bowling-score", () => {
   it("normal", () => {
     expect(calculate("12345123451234512345")).toEqual(60);
   });
-  it.only("perfect", () => {
+  it("perfect", () => {
     expect(calculate("XXXXXXXXXXXX")).toEqual(300);
   });
   it("heartbreak", () => {
